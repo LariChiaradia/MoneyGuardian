@@ -1,20 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native';
+
+
+import HomePage from './src/telas/Home';
 
 export default function App() {
+
+  //Fonte Utilizada 
+  // const [fonteCarregada] = useFonts({
+  //   "MontserratRegular": Montserrat_400Regular,
+  //   "MontserratBold": Montserrat_700Bold,
+  // });
+
+  // if (!fonteCarregada) {
+  //   return <View />
+  // }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView>
+      <HomePage />
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
