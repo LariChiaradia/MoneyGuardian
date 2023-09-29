@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function Topo() {
     return <>
-        <Text style={estilos.titulo}>Olá, Tarita</Text>
+        <View>
+            <Text style={estilos.titulo}>Olá, Joana</Text>
+        </View>
     </>
 }
 
