@@ -1,7 +1,7 @@
-import { SafeAreaView } from 'react-native';
-
-
-import HomePage from './src/telas/Home';
+import { NavigationContainer } from '@react-navigation/native';
+import * as React from 'react';
+import { StatusBar } from 'react-native';
+import Routes from './src/routes';
 
 export default function App() {
 
@@ -16,8 +16,9 @@ export default function App() {
   // }
 
   return (
-    <SafeAreaView>
-      <HomePage />
-    </SafeAreaView>
+    <NavigationContainer>
+      <StatusBar backgroundColor="#38A69D" barStyle="light-content" />
+      <Routes />
+    </NavigationContainer>
   );
 }
