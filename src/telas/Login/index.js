@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import {
+    KeyboardAvoidingView,
     Pressable,
     StatusBar,
     StyleSheet,
@@ -10,6 +11,7 @@ import {
     View
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IconSenha from 'react-native-vector-icons/Ionicons';
 
@@ -21,26 +23,26 @@ export default function Login() {
 
     return (
 
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <StatusBar backgroundColor="#DAA520" barStyle="light-content" />
             <Animatable.Image
                 animation="flipInY"
                 source={require('../../../assets/logo.png')}
-                style={{ width: "100%" }}
+                style={styles.logo}
                 resizeMode="contain"
             />
             <Text style={styles.formTitle}> Login </Text>
 
-            <View style={styles.containerP}>
+            <KeyboardAvoidingView style={styles.containerP}>
                 <TextInput
                     style={styles.input}
                     placeholder="Digite seu Email"
                     placeholderTextColor="#000000"
                 />
                 <Icon style={styles.icon} name="mail" size={25} color="#000000" />
-            </View>
+            </KeyboardAvoidingView>
 
-            <View style={styles.containerP}>
+            <KeyboardAvoidingView style={styles.containerP}>
                 <TextInput
                     style={styles.input}
                     placeholder="Digite sua Senha"
@@ -59,7 +61,7 @@ export default function Login() {
                         size={30}
                     />
                 </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
             <TouchableOpacity style={styles.formButton} onPress={() => navigation.navigate('HomePage')}>
                 <Text style={styles.textButton}>Logar</Text>
             </TouchableOpacity>
@@ -71,14 +73,14 @@ export default function Login() {
                     <Text style={styles.subTextButton}>Criar novo usuário</Text>
                 </Pressable>
             </View>
-        </View>
+        </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
     logo: {
-        width: 200,
-        height: 200,
+        width: 250,
+        height: 250,
         alignItems: 'center',
     },
     container: {
