@@ -66,9 +66,9 @@ export default function Login() {
                 <Text style={styles.textButton}>Logar</Text>
             </TouchableOpacity>
             <View style={styles.subContainer}>
-                <Pressable style={styles.subButton}>
+                {/* <Pressable style={styles.subButton}>
                     <Text style={styles.subTextButton}>Esqueci a senha</Text>
-                </Pressable>
+                </Pressable> */}
                 <Pressable style={styles.subButton}>
                     <Text style={styles.subTextButton}>Criar novo usuário</Text>
                 </Pressable>
@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
         width: '80%',
     },
     subButton: {
+        marginLeft: 90,
         padding: 10,
     },
     subTextButton: {
