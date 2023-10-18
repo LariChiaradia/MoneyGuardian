@@ -1,15 +1,17 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function DespesasGastos({ nome, imagem, valor }) {
+export default function DespesasGastos({ nome, icon, colorIcon, valor }) {
 
     return <TouchableOpacity
         style={estilos.card}
     >
-        <Image source={imagem} accessibilityLabel={nome} style={estilos.imagem} />
+        <Icon name={icon} size={48} color={colorIcon} style={estilos.icon} />
         <View style={estilos.informacoes}>
-            <View>
+            <View style={estilos.conteudo}>
                 <Text style={estilos.nome}>{nome}</Text>
+                <Text style={estilos.valor}>{valor}</Text>
             </View>
         </View>
 
@@ -34,12 +36,11 @@ const estilos = StyleSheet.create({
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
     },
-    imagem: {
+    icon: {
         width: 48,
         height: 48,
-        borderRadius: 6,
-        marginVertical: 16,
-        marginLeft: 16,
+        marginVertical: 10,
+        marginLeft: 10,
     },
     informacoes: {
         flex: 1,
@@ -48,8 +49,22 @@ const estilos = StyleSheet.create({
         marginLeft: 8,
         marginVertical: 16,
         marginRight: 16,
+        alignItems: "center",
+    },
+    conteudo: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginLeft: 8,
+        marginRight: 60,
+        alignItems: "center",
     },
     nome: {
+        fontSize: 14,
+        lineHeight: 22,
+        fontWeight: "bold",
+    },
+    valor: {
         fontSize: 14,
         lineHeight: 22,
         fontWeight: "bold",
