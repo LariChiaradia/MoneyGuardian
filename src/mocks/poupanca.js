@@ -1,10 +1,11 @@
 const poupanca = {
-    lista: [
+    listaPoupanca: [
         {
-            icon: "attach-money",
+            icon: "eye",
+            icon2: "eye-off",
             colorIcon: "#001232",
             valor: "R$ 2.000,00",
-        }
+        },
     ]
 }
 

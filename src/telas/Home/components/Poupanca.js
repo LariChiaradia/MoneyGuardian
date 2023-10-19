@@ -1,11 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
+import usePoupanca from '../../../hook/usePoupanca';
+import PoupancaValor from './PoupancaValor';
 
 export default function Poupanca() {
-    return <>
-        <View style={estilos.card}>
-            <Text style={estilos.valor}>R$ 2.000,00</Text>
-        </View>
-    </>
+
+    const [listaPoupanca] = usePoupanca();
+
+    const ListaPoupanca = () => { }
+    return <FlatList
+        data={listaPoupanca}
+        renderItem={({ item }) => <PoupancaValor {...item} />}
+        keyExtractor={({ nome }) => nome}
+        ListHeaderComponent={ListaPoupanca}
+        sytle={estilos.card} />
 }
 
 const estilos = StyleSheet.create({
