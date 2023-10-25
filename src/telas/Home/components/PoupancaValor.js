@@ -4,18 +4,22 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function PoupancaValor({ icon, colorIcon, valor }) {
     const [hide, setHide] = useState(true);
+    const toggleVisibility = () => {
+        setHide(!hide);
+    };
 
-    return <TouchableOpacity
-        style={estilos.card}
-        onPress={() => setHide(!hide)}>
-        <View style={estilos.informacoes}>
-            <Icon name={hide ? 'ios-eye' : 'ios-eye-off'} size={30} color={colorIcon} style={estilos.icon} />
-            <View style={estilos.conteudo}>
-                <Text style={estilos.valor}>{valor}</Text>
+    return (
+        <TouchableOpacity onPress={toggleVisibility}>
+            <View style={estilos.card}>
+                <Icon name={hide ? 'ios-eye' : 'ios-eye-off'} size={30} color={colorIcon} style={estilos.icon} />
+                <View style={estilos.informacoes}>
+                    <View style={estilos.conteudo}>
+                        <Text style={estilos.valor}>{hide ? '*******' : valor}</Text>
+                    </View>
+                </View>
             </View>
-        </View>
-
-    </TouchableOpacity>
+        </TouchableOpacity>
+    )
 }
 
 const estilos = StyleSheet.create({
