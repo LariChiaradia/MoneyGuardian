@@ -1,16 +1,16 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, ScrollView } from 'react-native';
 import Despesas from './components/Despesas';
 import Topo from './components/Topo';
 
 export default function HomePage() {
     return (
-        <View style={estilos.tela}>
+        <ScrollView style={estilos.tela}>
             <SafeAreaView>
                 <Topo />
                 <Despesas />
             </SafeAreaView>
-        </View>
+        </ScrollView>
     );
 }
 
