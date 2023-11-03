@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -21,7 +21,9 @@ export default function PoupancaValor({ icon, colorIcon, valor }) {
           style={estilos.icon}
         />
         <View style={estilos.conteudo}>
-          <Text style={estilos.valor}>{hide ? "*******" : formattedValue}</Text>
+          <Text style={estilos.valor}>
+            {hide ? "*".repeat(formattedValue.length) : formattedValue}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
