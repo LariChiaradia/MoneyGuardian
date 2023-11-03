@@ -35,6 +35,16 @@ export default function HomePage() {
   async function handleSave() {
     const datakey = "@moneyguardian:despesas";
 
+    if (categorias.key === "0") {
+      alert("Selecione uma categoria");
+      return;
+    }
+
+    if (valor === "") {
+      alert("Informe o valor da despesa");
+      return;
+    }
+
     setModalVisible(false);
     const newTransaction = {
       key: categorias.key,
