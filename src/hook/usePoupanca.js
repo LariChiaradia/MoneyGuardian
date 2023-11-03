@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import { carregaPoupanca } from "../service/carregaDados";
 
 export default function usePoupanca() {
+  const [listaPoupanca, setLista] = useState([]);
 
-    const [listaPoupanca, setLista] = useState([]);
+  useEffect(() => {
+    const carregarDados = async () => {
+      const poupanca = await carregaPoupanca();
+      setLista(poupanca);
+    };
 
-    useEffect(() => {
-        const retorno = carregaPoupanca();
-        setLista(retorno.listaPoupanca);
-    }, []);
+    carregarDados();
+  }, []);
 
-    return [listaPoupanca];
+  return [listaPoupanca];
 }
