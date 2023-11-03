@@ -2,14 +2,20 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
-export default function DespesasGastos({ nome, icon, colorIcon, valor }) {
+export default function DespesasGastos({ categoria, icon, color, valor }) {
+  const formattedValue = parseFloat(valor).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
   return (
     <TouchableOpacity style={estilos.card}>
-      <Icon name={icon} size={48} color={colorIcon} style={estilos.icon} />
+      <Icon name={icon} size={48} color={color} style={estilos.icon} />
       <View style={estilos.informacoes}>
         <View style={estilos.conteudo}>
-          <Text style={estilos.nome}>{nome}</Text>
-          <Text style={estilos.valor}>{valor}</Text>
+          <Text style={estilos.nome}>{categoria}</Text>
+          <Text style={estilos.valor}>{formattedValue}</Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -58,12 +64,12 @@ const estilos = StyleSheet.create({
     alignItems: "center",
   },
   nome: {
-    fontSize: 14,
+    fontSize: 17,
     lineHeight: 22,
     fontWeight: "bold",
   },
   valor: {
-    fontSize: 14,
+    fontSize: 17,
     lineHeight: 22,
     fontWeight: "bold",
   },

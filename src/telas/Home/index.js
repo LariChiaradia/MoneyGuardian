@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TouchableOpacity,
   SafeAreaView,
@@ -10,10 +10,10 @@ import {
 } from "react-native";
 import Despesas from "./components/Despesas";
 import Topo from "./components/Topo";
-import { TextInput } from "react-native";
 import { categories } from "../../utils/categories";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CurrencyInput from "react-native-currency-input";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function HomePage() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -25,17 +25,50 @@ export default function HomePage() {
   });
   const [categoriaVisible, setCategoriaVisible] = useState(false);
   const [valor, setValor] = useState("");
+  const [updateDespesasKey, setUpdateDespesasKey] = useState(0);
 
   const handlecategoria = (categoria) => {
     setCategorias(categoria);
     setCategoriaVisible(false);
   };
 
+  async function handleSave() {
+    const datakey = "@moneyguardian:despesas";
+
+    setModalVisible(false);
+    const newTransaction = {
+      key: categorias.key,
+      categoria: categorias.name,
+      icon: categorias.icon,
+      color: categorias.color,
+      valor: valor,
+      date: new Date(),
+    };
+
+    try {
+      const data = await AsyncStorage.getItem(datakey);
+      const currentData = data ? JSON.parse(data) : [];
+      const dataFormatted = [...currentData, newTransaction];
+      await AsyncStorage.setItem(datakey, JSON.stringify(dataFormatted));
+
+      setCategorias({
+        key: "0",
+        name: "Selecione uma categoria",
+        icon: "timer-sand-empty",
+        color: "#000000",
+      });
+      setValor("");
+      setUpdateDespesasKey((prevKey) => prevKey + 1);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <View style={estilos.tela}>
       <SafeAreaView>
         <Topo />
-        <Despesas />
+        <Despesas key={updateDespesasKey} />
       </SafeAreaView>
       <TouchableOpacity title="Adicionar" style={estilos.buttonStyle}>
         <Text style={estilos.text} onPress={() => setModalVisible(true)}>
@@ -90,10 +123,7 @@ export default function HomePage() {
               </ScrollView>
             )}
 
-            <TouchableOpacity
-              style={estilos.buttonStyle}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
+            <TouchableOpacity style={estilos.buttonStyle} onPress={handleSave}>
               <Text style={estilos.text}>Salvar</Text>
             </TouchableOpacity>
           </View>

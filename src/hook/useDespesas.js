@@ -2,14 +2,21 @@ import { useEffect, useState } from "react";
 import { carregaDespesas } from "../service/carregaDados";
 
 export default function useDespesas() {
-    const [titulo, setTitulo] = useState('');
-    const [lista, setLista] = useState([]);
+  const [titulo, setTitulo] = useState("");
+  const [lista, setLista] = useState([]);
 
-    useEffect(() => {
-        const retorno = carregaDespesas();
-        setTitulo(retorno.titulo);
-        setLista(retorno.lista);
-    }, []);
+  useEffect(() => {
+    const carregarDados = async () => {
+      const transacoes = await carregaDespesas();
 
-    return [titulo, lista];
+      if (transacoes && transacoes.length > 0) {
+        setTitulo("Despesas");
+        setLista(transacoes);
+      }
+    };
+
+    carregarDados();
+  }, []);
+
+  return [titulo, lista];
 }
