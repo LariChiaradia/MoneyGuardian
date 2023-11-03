@@ -1,18 +1,22 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { useSelector } from "react-redux";
 
 export default function Topo() {
-    return <>
-        <View>
-            <Text style={estilos.titulo}>Olá, Joana</Text>
-        </View>
+  const userName = useSelector((state) => state.user.name);
+  return (
+    <>
+      <View>
+        <Text style={estilos.titulo}>Olá, {userName}</Text>
+      </View>
     </>
+  );
 }
 
 const estilos = StyleSheet.create({
-    titulo: {
-        color: "#ffffff",
-        fontSize: 26,
-        margin: 20,
-    }
-})
+  titulo: {
+    color: "#ffffff",
+    fontSize: 26,
+    margin: 20,
+  },
+});
