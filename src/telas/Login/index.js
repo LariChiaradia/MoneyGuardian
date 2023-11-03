@@ -23,7 +23,11 @@ export default function Login() {
 
     return (
 
-        <SafeAreaView style={styles.container}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.container}
+        >
+
             <StatusBar backgroundColor="#DAA520" barStyle="light-content" />
             <Animatable.Image
                 animation="flipInY"
@@ -73,7 +77,8 @@ export default function Login() {
                     <Text style={styles.subTextButton}>Criar novo usuário</Text>
                 </Pressable>
             </View>
-        </SafeAreaView>
+
+        </KeyboardAvoidingView>
     );
 }
 
