@@ -1,26 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { useSelector } from "react-redux";
+import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Topo() {
- 
-  const user = useSelector ( (state) => state.user.name ) 
+  const user = useSelector((state) => state.user.name);
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
 
+  const handleLogout = () => {
 
-  console.log(user)
+    dispatch({ type: "LOGOUT" });
+
+    // Navegar de volta para a tela de login
+    navigation.navigate("Login");
+  };
+
   return (
     <>
-      <View>
+      <View style={estilos.container}>
         <Text style={estilos.titulo}>Olá, {user} </Text>
+        {/* Botão de Sair */}
+        <TouchableOpacity onPress={handleLogout}>
+          <Text style={estilos.sair}>Sair</Text>
+        </TouchableOpacity>
       </View>
     </>
   );
 }
 
 const estilos = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    margin: 20,
+  },
   titulo: {
     color: "#ffffff",
     fontSize: 26,
-    margin: 20,
+  },
+  sair: {
+    color: "#ffffff",
+    fontSize: 16,
+    textDecorationLine: "underline",
   },
 });
