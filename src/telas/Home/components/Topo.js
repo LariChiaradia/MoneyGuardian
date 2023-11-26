@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useSelector } from "react-redux";
 
 export default function Topo() {
-  const userName = useSelector((state) => state.user.name);
+ 
+  const user = useSelector ( (state) => state.user.name ) 
+
+
+  console.log(user)
   return (
     <>
       <View>
-        <Text style={estilos.titulo}>Olá, {userName}</Text>
+        <Text style={estilos.titulo}>Olá, {user} </Text>
       </View>
     </>
   );
