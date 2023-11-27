@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   TouchableOpacity,
   SafeAreaView,
@@ -7,6 +7,8 @@ import {
   Text,
   Modal,
   ScrollView,
+  DrawerLayoutAndroid,
+  Button,
 } from "react-native";
 import Despesas from "./components/Despesas";
 import Topo from "./components/Topo";
@@ -31,6 +33,8 @@ export default function HomePage() {
     setCategorias(categoria);
     setCategoriaVisible(false);
   };
+
+  const drawer = useRef(null);
 
   async function handleSave() {
     const datakey = "@moneyguardian:despesas";
@@ -74,72 +78,95 @@ export default function HomePage() {
     }
   }
 
-  return (
-    <View style={estilos.tela}>
-      <SafeAreaView>
-        <Topo />
-        <Despesas key={updateDespesasKey} />
-      </SafeAreaView>
-      <TouchableOpacity title="Adicionar" style={estilos.buttonStyle}>
-        <Text style={estilos.text} onPress={() => setModalVisible(true)}>
-          Adicionar
-        </Text>
-      </TouchableOpacity>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={estilos.centeredView}>
-          <View style={estilos.modalView}>
-            <TouchableOpacity
-              style={estilos.buttonCategoria}
-              onPress={() => setCategoriaVisible(true)}
-            >
-              <Icon
-                name={categorias.icon}
-                size={30}
-                color={categorias.color}
-                style={estilos.icon}
-              />
-              <Text>{categorias.name}</Text>
-            </TouchableOpacity>
-
-            <CurrencyInput
-              style={estilos.input}
-              value={valor}
-              onChangeValue={setValor}
-              prefix="R$"
-              delimiter="."
-              separator=","
-              precision={2}
-              minValue={0}
-            />
-            {categoriaVisible && (
-              <ScrollView>
-                {categories.map((item) => (
-                  <TouchableOpacity
-                    style={estilos.optionsCategories}
-                    key={item.key}
-                    onPress={() => handlecategoria(item)}
-                  >
-                    <Icon name={item.icon} size={30} color={item.color} style={estilos.icon} />
-                    <Text>{item.name}</Text>
-                  </TouchableOpacity>
-                ))}
-              </ScrollView>
-            )}
-
-            <TouchableOpacity style={estilos.buttonStyle} onPress={handleSave}>
-              <Text style={estilos.text}>Salvar</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+  const navigationView = () => (
+    <View style={[styles.container, styles.navigationContainer]}>
+      <Text style={styles.paragraph}>I'm in the Drawer!</Text>
+      <Button title="Close drawer" onPress={() => drawer.current.closeDrawer()} />
     </View>
+  );
+
+  const openDrawer = () => {
+    drawer.current.openDrawer();
+  };
+
+  return (
+    <DrawerLayoutAndroid
+      ref={drawer}
+      drawerWidth={300}
+      drawerPosition={"left"}
+      renderNavigationView={navigationView}
+    >
+      <View style={estilos.tela}>
+        <SafeAreaView>
+          <Topo onOpenDrawerClick={openDrawer} />
+          <Despesas key={updateDespesasKey} />
+        </SafeAreaView>
+        <TouchableOpacity title="Adicionar" style={estilos.buttonStyle}>
+          <Text style={estilos.text} onPress={() => setModalVisible(true)}>
+            Adicionar
+          </Text>
+        </TouchableOpacity>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={estilos.centeredView}>
+            <View style={estilos.modalView}>
+              <TouchableOpacity
+                style={estilos.buttonCategoria}
+                onPress={() => setCategoriaVisible(true)}
+              >
+                <Icon
+                  name={categorias.icon}
+                  size={30}
+                  color={categorias.color}
+                  style={estilos.icon}
+                />
+                <Text>{categorias.name}</Text>
+              </TouchableOpacity>
+
+              <CurrencyInput
+                style={estilos.input}
+                value={valor}
+                onChangeValue={setValor}
+                prefix="R$"
+                delimiter="."
+                separator=","
+                precision={2}
+                minValue={0}
+              />
+              {categoriaVisible && (
+                <ScrollView>
+                  {categories.map((item) => (
+                    <TouchableOpacity
+                      style={estilos.optionsCategories}
+                      key={item.key}
+                      onPress={() => handlecategoria(item)}
+                    >
+                      <Icon
+                        name={item.icon}
+                        size={30}
+                        color={item.color}
+                        style={estilos.icon}
+                      />
+                      <Text>{item.name}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              )}
+
+              <TouchableOpacity style={estilos.buttonStyle} onPress={handleSave}>
+                <Text style={estilos.text}>Salvar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      </View>
+    </DrawerLayoutAndroid>
   );
 }
 
@@ -205,5 +232,22 @@ const estilos = StyleSheet.create({
     backgroundColor: "#000000",
     width: "100%",
     height: "100%",
+  },
+});
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 16,
+  },
+  navigationContainer: {
+    backgroundColor: "#ecf0f1",
+  },
+  paragraph: {
+    padding: 16,
+    fontSize: 15,
+    textAlign: "center",
   },
 });

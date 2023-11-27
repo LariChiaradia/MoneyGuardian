@@ -1,15 +1,21 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useRef, useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Button,
+  DrawerLayoutAndroid,
+} from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Topo() {
+export default function Topo({ onOpenDrawerClick }) {
   const user = useSelector((state) => state.user.name);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const handleLogout = () => {
-
     dispatch({ type: "LOGOUT" });
 
     // Navegar de volta para a tela de login
@@ -17,15 +23,14 @@ export default function Topo() {
   };
 
   return (
-    <>
-      <View style={estilos.container}>
-        <Text style={estilos.titulo}>Olá, {user} </Text>
-        {/* Botão de Sair */}
-        <TouchableOpacity onPress={handleLogout}>
-          <Text style={estilos.sair}>Sair</Text>
-        </TouchableOpacity>
-      </View>
-    </>
+    <View style={estilos.container}>
+      <Button title="Open drawer" onPress={onOpenDrawerClick} />
+      <Text style={estilos.titulo}>Olá, {user} </Text>
+      {/* Botão de Sair */}
+      <TouchableOpacity onPress={handleLogout}>
+        <Text style={estilos.sair}>Sair</Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 

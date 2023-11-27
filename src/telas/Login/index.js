@@ -32,14 +32,14 @@ export default function Login() {
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [users, setUsers] = useState([]);
 
-
   const handleLogin = async () => {
+    navigation.navigate("HomePage");
     try {
       const userList = await getUsers();
       const user = userList.find((user) => user.user === email);
-  
-      console.log(user)
-      console.log("")
+
+      console.log(user);
+      console.log("");
 
       if (user) {
         if (user.password === senha) {
@@ -47,13 +47,12 @@ export default function Login() {
           dispatch(setEmailUser(user.user));
           dispatch(setPassword(user.senha));
           dispatch(setName(user.name));
-          
-          console.log(user.name)
-          console.log("")
-          
-          console.log(user.name)
-          console.log("")
 
+          console.log(user.name);
+          console.log("");
+
+          console.log(user.name);
+          console.log("");
         } else {
           setErrorModalVisible(true);
         }
@@ -103,32 +102,24 @@ export default function Login() {
           secureTextEntry={passhide}
         />
 
-        <TouchableOpacity
-          style={styles.icon}
-          onPress={() => setPasshide(!passhide)}
-        >
-          <IconSenha
-            name={passhide ? "ios-eye" : "ios-eye-off"}
-            color="#000000"
-            size={30}
-          />
+        <TouchableOpacity style={styles.icon} onPress={() => setPasshide(!passhide)}>
+          <IconSenha name={passhide ? "ios-eye" : "ios-eye-off"} color="#000000" size={30} />
         </TouchableOpacity>
       </KeyboardAvoidingView>
       <TouchableOpacity style={styles.formButton} onPress={handleLogin}>
         <Text style={styles.textButton}>Logar</Text>
       </TouchableOpacity>
       <View style={styles.subContainer}>
-      <Pressable
-        style={({ pressed }) => [
-          styles.subButton,
-          { backgroundColor: pressed ? "#DAA520" : "transparent" },
-        ]}
-        onPress={() => navigation.navigate('Cadastro')}
-  >
-    <Text style={styles.subTextButton}>Criar novo usuário</Text>
-  </Pressable>
-</View>
-
+        <Pressable
+          style={({ pressed }) => [
+            styles.subButton,
+            { backgroundColor: pressed ? "#DAA520" : "transparent" },
+          ]}
+          onPress={() => navigation.navigate("Cadastro")}
+        >
+          <Text style={styles.subTextButton}>Criar novo usuário</Text>
+        </Pressable>
+      </View>
 
       {/* Error Modal */}
       <Modal
@@ -139,9 +130,7 @@ export default function Login() {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.errorText}>
-              Senha errada ou usuário não encontrado
-            </Text>
+            <Text style={styles.errorText}>Senha errada ou usuário não encontrado</Text>
             <TouchableOpacity onPress={closeErrorModal}>
               <Text style={styles.closeButton}>Fechar</Text>
             </TouchableOpacity>
@@ -209,10 +198,10 @@ const styles = StyleSheet.create({
   },
   subButton: {
     padding: 10,
-    borderRadius: 10, 
-    alignSelf: 'center', 
-    marginTop: 10, 
-    marginLeft: 85, 
+    borderRadius: 10,
+    alignSelf: "center",
+    marginTop: 10,
+    marginLeft: 85,
   },
   subTextButton: {
     color: "#ffffff",
