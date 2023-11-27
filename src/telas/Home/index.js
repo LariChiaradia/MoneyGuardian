@@ -51,6 +51,12 @@ export default function HomePage() {
       return;
     }
 
+
+    if (description === "" ) {
+      alert("Adicione descrição");
+      return;
+    }
+
     setModalVisible(false);
     const newTransaction = {
       key: categorias.key,
