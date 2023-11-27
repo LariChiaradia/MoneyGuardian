@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   Text,
+  TextInput,
   Modal,
   ScrollView,
   DrawerLayoutAndroid,
@@ -28,6 +29,7 @@ export default function HomePage() {
   const [categoriaVisible, setCategoriaVisible] = useState(false);
   const [valor, setValor] = useState("");
   const [updateDespesasKey, setUpdateDespesasKey] = useState(0);
+  const [description, setDescription]=useState("");
 
   const handlecategoria = (categoria) => {
     setCategorias(categoria);
@@ -56,6 +58,7 @@ export default function HomePage() {
       icon: categorias.icon,
       color: categorias.color,
       valor: valor,
+      description: description,
       date: new Date(),
     };
 
@@ -72,6 +75,7 @@ export default function HomePage() {
         color: "#000000",
       });
       setValor("");
+      setDescription("");
       setUpdateDespesasKey((prevKey) => prevKey + 1);
     } catch (error) {
       console.log(error);
@@ -128,7 +132,12 @@ export default function HomePage() {
                 />
                 <Text>{categorias.name}</Text>
               </TouchableOpacity>
-
+              <TextInput 
+          style={estilos.input}
+          onChangeText={setDescription}
+          placeholder="Descrição"
+          value={description}
+          /> 
               <CurrencyInput
                 style={estilos.input}
                 value={valor}
