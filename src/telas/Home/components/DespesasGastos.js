@@ -114,6 +114,7 @@ const estilos = StyleSheet.create({
     fontWeight: "bold",
   },
   valor: {
+    marginLeft: 8,
     fontSize: 14,
     lineHeight: 22,
     fontWeight: "bold",

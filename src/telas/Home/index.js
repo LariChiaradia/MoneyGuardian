@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
+  Alert,
   TouchableOpacity,
   SafeAreaView,
   StyleSheet,
@@ -42,18 +43,17 @@ export default function HomePage() {
     const datakey = "@moneyguardian:despesas";
 
     if (categorias.key === "0") {
-      alert("Selecione uma categoria");
+      Alert.alert("Erro", "Selecione uma categoria");
       return;
     }
-
+  
     if (valor === "") {
-      alert("Informe o valor da despesa");
+      Alert.alert("Erro", "Informe o valor da despesa");
       return;
     }
-
-
-    if (description === "" ) {
-      alert("Adicione descrição");
+  
+    if (description === "") {
+      Alert.alert("Erro", "Adicione descrição");
       return;
     }
 
