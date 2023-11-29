@@ -16,7 +16,7 @@ export default function DespesasGastos({ categoria, icon, color, valor, descript
     const dia = String(data.getDate()).padStart(2, "0");
     const mes = String(data.getMonth() + 1).padStart(2, "0");
     const ano = data.getFullYear();
-    const dataFormatadaString = `${dia}/${mes}/${ano}`;
+    const dataFormatadaString = ${dia}/${mes}/${ano};
     setDataFormatada(dataFormatadaString);
   }, [date]);
 
@@ -114,6 +114,7 @@ const estilos = StyleSheet.create({
     fontWeight: "bold",
   },
   valor: {
+    marginLeft: 8,
     fontSize: 14,
     lineHeight: 22,
     fontWeight: "bold",
