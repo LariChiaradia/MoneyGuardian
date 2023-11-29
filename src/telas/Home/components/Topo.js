@@ -9,18 +9,15 @@ import {
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import { logout } from "../../../store/authSlice";
 
 export default function Topo({ onOpenDrawerClick }) {
   const user = useSelector((state) => state.user.name);
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
-  const handleLogout = () => {
-    dispatch({ type: "LOGOUT" });
-
-    // Navegar de volta para a tela de login
-    navigation.navigate("Login");
-  };
+  function handleLogout() {
+    dispatch(logout());
+  }
 
   return (
     <View style={estilos.container}>

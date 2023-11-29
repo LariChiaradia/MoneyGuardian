@@ -30,29 +30,18 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [passhide, setPasshide] = useState(true);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
-  const [users, setUsers] = useState([]);
 
   const handleLogin = async () => {
-    navigation.navigate("HomePage");
     try {
       const userList = await getUsers();
       const user = userList.find((user) => user.user === email);
 
-      console.log(user);
-      console.log("");
-
       if (user) {
         if (user.password === senha) {
-          navigation.navigate("HomePage");
           dispatch(setEmailUser(user.user));
           dispatch(setPassword(user.senha));
           dispatch(setName(user.name));
-
-          console.log(user.name);
-          console.log("");
-
-          console.log(user.name);
-          console.log("");
+          dispatch(setToken(user.user));
         } else {
           setErrorModalVisible(true);
         }
