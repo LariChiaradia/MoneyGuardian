@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default function Topo({ onOpenDrawerClick }) {
   const user = useSelector((state) => state.user.name);
@@ -24,7 +25,11 @@ export default function Topo({ onOpenDrawerClick }) {
 
   return (
     <View style={estilos.container}>
-      <Button title="Open drawer" onPress={onOpenDrawerClick} />
+    {/* Ícone de hambúrguer para abrir o drawer */}
+    <TouchableOpacity style={estilos.botaoDrawer} onPress={onOpenDrawerClick}>
+      <Icon name="bars" size={30} color="#fff" />
+    </TouchableOpacity>
+    
       <Text style={estilos.titulo}>Olá, {user} </Text>
       {/* Botão de Sair */}
       <TouchableOpacity onPress={handleLogout}>

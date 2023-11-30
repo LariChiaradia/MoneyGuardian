@@ -16,8 +16,10 @@ import { categories } from "../../utils/categories";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CurrencyInput from "react-native-currency-input";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from '@react-navigation/native';
 
 export default function HomePage() {
+  const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [categorias, setCategorias] = useState({
     key: "0",
@@ -79,12 +81,18 @@ export default function HomePage() {
   }
 
   const navigationView = () => (
-    <View style={[styles.container, styles.navigationContainer]}>
-      <Text style={styles.paragraph}>I'm in the Drawer!</Text>
-      <Button title="Close drawer" onPress={() => drawer.current.closeDrawer()} />
+    <View style={[estilos.container, estilos.navigationContainer]}>
+      <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
+        <Text style={estilos.HomePages}>Tela Inicial</Text>
+      </TouchableOpacity>
+
+      <View style={estilos.separator} />
+
+      <TouchableOpacity onPress={() => navigation.navigate('DespesasGraficos')}>
+        <Text style={estilos.TextGrafico}>Gráficos</Text>
+      </TouchableOpacity>
     </View>
   );
-
   const openDrawer = () => {
     drawer.current.openDrawer();
   };
@@ -101,11 +109,13 @@ export default function HomePage() {
           <Topo onOpenDrawerClick={openDrawer} />
           <Despesas key={updateDespesasKey} />
         </SafeAreaView>
+
         <TouchableOpacity title="Adicionar" style={estilos.buttonStyle}>
           <Text style={estilos.text} onPress={() => setModalVisible(true)}>
             Adicionar
           </Text>
         </TouchableOpacity>
+
         <Modal
           animationType="slide"
           transparent={true}
@@ -166,7 +176,7 @@ export default function HomePage() {
           </View>
         </Modal>
       </View>
-    </DrawerLayoutAndroid>
+    </DrawerLayoutAndroid >
   );
 }
 
@@ -228,23 +238,39 @@ const estilos = StyleSheet.create({
     color: "#000000",
     padding: 10,
   },
+
   tela: {
     backgroundColor: "#000000",
     width: "100%",
     height: "100%",
   },
-});
-
-const styles = StyleSheet.create({
+  TextGrafico: {
+    color: "#daa520",
+    padding: 20,
+    fontSize: 25,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: 'gray', // Cor da linha divisória
+    marginVertical: 5,
+  },
+  HomePages: {
+    color: "#daa520",
+    fontSize: 25,
+  },
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 16,
+    padding: 50,
+    display: 'flex',
+    alignItems: 'center',
+    borderRightWidth: 1,
+    borderRightColor: '#daa520',
   },
+
   navigationContainer: {
-    backgroundColor: "#ecf0f1",
+    backgroundColor: "#000000",
   },
+
   paragraph: {
     padding: 16,
     fontSize: 15,

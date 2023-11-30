@@ -6,7 +6,7 @@ export const categories = [
   { key: "studies", name: "Estudos", icon: "bookshelf", color: "#9C001A" },
   { key: "light", name: "Luz", icon: "lightbulb", color: "#FFD700" },
   { key: "water", name: "Água", icon: "water", color: "#1E90FF" },
-  { key: "internet", name: "Internet", icon: "access-point-network", color: "#000000" },
+  { key: "internet", name: "Internet", icon: "access-point-network", color: "#808080" },
   { key: "market", name: "Mercado", icon: "cart-outline", color: "#FA9C29" },
   { key: "rental", name: "Aluguel", icon: "home", color: "#3cb371" },
   { key: "gas", name: "Gás", icon: "gas-cylinder", color: "#636363" },

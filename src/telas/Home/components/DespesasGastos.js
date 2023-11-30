@@ -9,6 +9,7 @@ export default function DespesasGastos({ categoria, icon, color, valor }) {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
+
   return (
     <TouchableOpacity style={estilos.card}>
       <Icon name={icon} size={48} color={color} style={estilos.icon} />
