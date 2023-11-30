@@ -18,7 +18,7 @@ import { categories } from "../../utils/categories";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CurrencyInput from "react-native-currency-input";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 export default function HomePage() {
   const navigation = useNavigation();
@@ -32,7 +32,7 @@ export default function HomePage() {
   const [categoriaVisible, setCategoriaVisible] = useState(false);
   const [valor, setValor] = useState("");
   const [updateDespesasKey, setUpdateDespesasKey] = useState(0);
-  const [description, setDescription]=useState("");
+  const [description, setDescription] = useState("");
 
   const handlecategoria = (categoria) => {
     setCategorias(categoria);
@@ -48,12 +48,12 @@ export default function HomePage() {
       Alert.alert("Erro", "Selecione uma categoria");
       return;
     }
-  
+
     if (valor === "") {
       Alert.alert("Erro", "Informe o valor da despesa");
       return;
     }
-  
+
     if (description === "") {
       Alert.alert("Erro", "Adicione descrição");
       return;
@@ -92,13 +92,13 @@ export default function HomePage() {
 
   const navigationView = () => (
     <View style={[estilos.container, estilos.navigationContainer]}>
-      <TouchableOpacity onPress={() => navigation.navigate('HomePage')}>
+      <TouchableOpacity onPress={() => navigation.navigate("HomePage")}>
         <Text style={estilos.HomePages}>Tela Inicial</Text>
       </TouchableOpacity>
 
       <View style={estilos.separator} />
 
-      <TouchableOpacity onPress={() => navigation.navigate('DespesasGraficos')}>
+      <TouchableOpacity onPress={() => navigation.navigate("DespesasGraficos")}>
         <Text style={estilos.TextGrafico}>Gráficos</Text>
       </TouchableOpacity>
     </View>
@@ -148,12 +148,12 @@ export default function HomePage() {
                 />
                 <Text>{categorias.name}</Text>
               </TouchableOpacity>
-              <TextInput 
-          style={estilos.input}
-          onChangeText={setDescription}
-          placeholder="Descrição"
-          value={description}
-          /> 
+              <TextInput
+                style={estilos.input}
+                onChangeText={setDescription}
+                placeholder="Descrição"
+                value={description}
+              />
               <CurrencyInput
                 style={estilos.input}
                 value={valor}
@@ -191,7 +191,7 @@ export default function HomePage() {
           </View>
         </Modal>
       </View>
-    </DrawerLayoutAndroid >
+    </DrawerLayoutAndroid>
   );
 }
 
@@ -266,7 +266,7 @@ const estilos = StyleSheet.create({
   },
   separator: {
     height: 1,
-    backgroundColor: 'gray', // Cor da linha divisória
+    backgroundColor: "gray", // Cor da linha divisória
     marginVertical: 5,
   },
   HomePages: {
@@ -276,10 +276,10 @@ const estilos = StyleSheet.create({
   container: {
     flex: 1,
     padding: 50,
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     borderRightWidth: 1,
-    borderRightColor: '#daa520',
+    borderRightColor: "#daa520",
   },
 
   navigationContainer: {
