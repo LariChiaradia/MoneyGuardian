@@ -17,19 +17,18 @@ const authSlice = createSlice({
     logout(state) {
       state.token = "";
     },
-    setEmailUser(state, action){
+    setEmailUser(state, action) {
       state.user = action.payload;
     },
-    setPassword(state, action){
+    setPassword(state, action) {
       state.senha = action.payload;
     },
-    setName(state, action){
+    setName(state, action) {
       state.name = action.payload;
     },
-    
   },
 });
 
 export default authSlice.reducer;
-export const { setEmailUser, setPassword, setName } = authSlice.actions;
+export const { setEmailUser, setPassword, setName, setToken, logout } = authSlice.actions;
 export const selectUser = (state) => state.user;
